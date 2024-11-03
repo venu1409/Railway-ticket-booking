@@ -12,7 +12,7 @@ int generateRandom80to90() { return (rand() % 11) + 80; }
 long long generateRandom10Digit() { return (long long)(rand() % 9000000000LL) + 1000000000LL; }
 
 
-void createTicketFile(const char *from, const char *to, int day, int month, int year, int seatCount, char names[][250], long long PNR) {
+void createTicketFile(int Train_Number, const char *from, const char *to, int day, int month, int year, int seatCount, char names[][250], long long PNR) {
     FILE *file = fopen("ticket.txt", "w");
     if (file == NULL) {
         printf("Error creating ticket file!\n");
@@ -22,10 +22,12 @@ void createTicketFile(const char *from, const char *to, int day, int month, int 
     fprintf(file, "Ticket Booking Confirmation\n");
     fprintf(file, "---------------------------\n");
     fprintf(file, "Journey Details:\n");
+    fprintf(file, "Train Number: %d\n", Train_Number);
     fprintf(file, "From: %s\n", from);
     fprintf(file, "To: %s\n", to);
     fprintf(file, "Date of Journey: %02d-%02d-%04d\n", day, month, year);
     fprintf(file, "PNR Number: %lld\n\n", PNR);
+
     fprintf(file, "\nPassenger Details:\n");
 
     for (int i = 0; i < seatCount; i++) {
@@ -40,12 +42,12 @@ void createTicketFile(const char *from, const char *to, int day, int month, int 
 }
 
 int main() {
-    srand(time(0)); 
+    srand(time(0));
 
     char from[250], to[250];
     int day, month, year;
 
-  
+
     while (1) {
         printf("Enter boarding station: ");
         scanf("%s", from);
@@ -60,11 +62,11 @@ int main() {
         }
     }
 
-    
+
     time_t t = time(NULL);
     struct tm *tm_info = localtime(&t);
 
-   
+
     char date[11];
     strftime(date, sizeof(date), "%d-%m-%Y", tm_info);
     printf("Today's date: %s\n", date);
@@ -73,21 +75,21 @@ int main() {
         printf("Enter the date of journey (in format DD-MM-YYYY): ");
         if (scanf("%02d-%02d-%04d", &day, &month, &year) != 3 || day < 1 || day > 31 || month < 1 || month > 12 || year < 2024) {
             printf("Invalid date. Please check and enter a valid journey date.\n");
-            
+
             while (getchar() != '\n');
         } else {
             break;
         }
     }
 
-   
+
     int Train_1 = generateRandom5Digit();
     int Train_2 = generateRandom5Digit();
     int Train_3 = generateRandom5Digit();
     int Train_4 = generateRandom5Digit();
     int Train_5 = generateRandom5Digit();
 
-    
+
     printf("Available Trains:\n");
     if (day == tm_info->tm_mday && month == tm_info->tm_mon + 1 && year == tm_info->tm_year + 1900) {
         printf("\nTrain Number: %d (Express)\n", Train_1);
@@ -98,6 +100,7 @@ int main() {
         printf("Waiting list (RAC): %d\n", generateRandom15to30());
         printf("--------------------------------------------------------------------");
         printf("\nThe trains that are Express are Ac and Passenger are Non-Ac!!!!");
+        printf("\n--------------------------------------------------------------------");
     } else {
         printf("\nTrain Number: %d (Express)\n", Train_1);
         printf("Available berths: %d\n", generateRandom60to70());
@@ -111,9 +114,10 @@ int main() {
         printf("Waiting list (RAC): %d\n", generateRandom15to30());
         printf("--------------------------------------------------------------------");
         printf("\nThe trains that are Express are Ac and Passenger are Non-Ac!!!!");
+        printf("\n--------------------------------------------------------------------");
     }
 
-    
+
     int Train_Number, Seats;
     while (1) {
         printf("\nEnter Train number: ");
@@ -136,7 +140,7 @@ int main() {
         }
     }
 
-   
+
     char names[4][250];
     for (int i = 0; i < Seats; i++) {
         int Age;
@@ -165,14 +169,16 @@ int main() {
             printf("Email: ");
             scanf("%s", Gmail_Address);
         }
+        char Seat_Preference;
+
     }
 
-    
+
     double fare = (Train_Number == Train_1 || Train_Number == Train_2) ? 950 : 650;
-    double Total_Fare = fare * Seats * 1.18;  
+    double Total_Fare = fare * Seats * 1.18;
     printf("The fare (incl. GST) is %.2lf\n", Total_Fare);
 
-   
+
     int confirm_code;
     while (1) {
         printf("Enter 1234567890 to confirm payment: ");
@@ -181,10 +187,10 @@ int main() {
         printf("Incorrect confirmation code. Please enter the correct code.\n");
     }
 
-    
+
     long long PNR = generateRandom10Digit();
     printf("\nYOUR PNR NUMBER: %lld\n", PNR);
-    createTicketFile(from, to, day, month, year, Seats, names, PNR);
+    createTicketFile(Train_Number, from, to, day, month, year, Seats, names, PNR);
 
     printf("Congratulations! Ticket has been booked.\n");
     return 0;
