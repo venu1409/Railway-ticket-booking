@@ -72,8 +72,9 @@ int main() {
     printf("Today's date: %s\n", date);
 
     while (1) {
-        printf("Enter the date of journey (in format DD-MM-YYYY): ");
-        if (scanf("%02d-%02d-%04d", &day, &month, &year) != 3 || day < 1 || day > 31 || month < 1 || month > 12 || year < 2024) {
+        printf("Enter the date of journey (in format DD-MM-YYYY ");
+        printf("Enter only untill 01-02-2025) : ");
+                if (scanf("%02d-%02d-%04d", &day, &month, &year) != 3 || day < 1 || day > 31 || month < 1 || month > 12 || year < 2024 ) {
             printf("Invalid date. Please check and enter a valid journey date.\n");
 
             while (getchar() != '\n');
@@ -100,7 +101,6 @@ int main() {
         printf("Waiting list (RAC): %d\n", generateRandom15to30());
         printf("--------------------------------------------------------------------");
         printf("\nThe trains that are Express are Ac and Passenger are Non-Ac!!!!");
-        printf("\n--------------------------------------------------------------------");
     } else {
         printf("\nTrain Number: %d (Express)\n", Train_1);
         printf("Available berths: %d\n", generateRandom60to70());
@@ -114,7 +114,7 @@ int main() {
         printf("Waiting list (RAC): %d\n", generateRandom15to30());
         printf("--------------------------------------------------------------------");
         printf("\nThe trains that are Express are Ac and Passenger are Non-Ac!!!!");
-        printf("\n--------------------------------------------------------------------");
+         printf("\n--------------------------------------------------------------------");
     }
 
 
