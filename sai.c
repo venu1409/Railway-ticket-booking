@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+#include "irctc.c"
 
 // Functions to generate random numbers within specific ranges
 int generateRandom60to70() { return (rand() % 11) + 60; }
@@ -11,35 +12,6 @@ int generateRandom15to30() { return (rand() % 16) + 15; }
 int generateRandom80to90() { return (rand() % 11) + 80; }
 long long generateRandom10Digit() { return (long long)(rand() % 9000000000LL) + 1000000000LL; }
 
-// Function to create and save ticket details
-void createTicketFile(int Train_Number, const char *from, const char *to, int day, int month, int year, int seatCount, char names[][250], char Seat_Preference[], long long PNR ) {
-    FILE *file = fopen("ticket.txt", "w");
-    if (file == NULL) {
-        printf("Error creating ticket file!\n");
-        return;
-    }
-
-    fprintf(file, "Ticket Booking Confirmation\n");
-    fprintf(file, "---------------------------\n");
-    fprintf(file, "Journey Details:\n");
-    fprintf(file, "Train Number: %d\n", Train_Number);
-    fprintf(file, "From: %s\n", from);
-    fprintf(file, "To: %s\n", to);
-    fprintf(file, "Date of Journey: %02d-%02d-%04d\n", day, month, year);
-    fprintf(file, "PNR Number: %lld\n\n", PNR);
-
-    fprintf(file, "Passenger Details:\n");
-    for (int i = 0; i < seatCount; i++) {
-        fprintf(file, "Passenger %d: %s\n", i + 1, names[i]);
-        fprintf(file, "Seat Preference: %c\n", Seat_Preference[i]);
-    }
-
-    fprintf(file, "---------------------------\n");
-    fprintf(file, "Thank you for booking with us!");
-
-    fclose(file);
-    printf("\nTicket details have been saved to ticket.txt\n");
-}
 
 int main() {
     srand(time(0));
@@ -131,7 +103,7 @@ int main() {
     }
 
     char names[4][250];
-    char Seat_Preference[4]; 
+    char Seat_Preference[4];
     for (int i = 0; i < Seats; i++) {
         int Age;
         char Gender;
