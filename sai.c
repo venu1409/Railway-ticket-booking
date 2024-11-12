@@ -4,7 +4,7 @@
 #include <string.h>
 #include "irctc.c"
 
-/*inka ticket numbers set avaled code ni malli remodel cheyali*/
+//inka ticket numbers set avaled code ni malli remodel cheyali
 
 
 // Functions to generate random numbers within specific ranges
@@ -35,8 +35,8 @@ int main() {
         }
     }
 
-    time_t t = time(NULL);
-    struct tm *tm_info = localtime(&t);
+    time_t t = time(NULL); //chatgpt
+    struct tm *tm_info = localtime(&t); //chatgpt
 
     char date[11];
     strftime(date, sizeof(date), "%d-%m-%Y", tm_info);
@@ -44,9 +44,9 @@ int main() {
 
     while (1) {
         printf("Enter the date of journey (in format DD-MM-YYYY, until 01-02-2025): ");
-        scanf(" %d- %d- %d", &day, &month, &year);//change chesa
+        scanf(" %d- %d- %d", &day, &month, &year);
 
-         if (day > 31 || year < 2024 || month > 12)/*change chesa*/{
+         if (day > 31 || year < 2024 || month > 12){
             printf("Invalid date. Please check and enter a valid journey date.\n");
         } else {
             break;
@@ -61,7 +61,7 @@ int main() {
     int Train_5 = generateRandom5Digit();
 
     printf("Available Trains:\n");
-    if (day == tm_info->tm_mday && month == tm_info->tm_mon + 1 && year == tm_info->tm_year + 1900)/*change cheyalem enduku ante date ni oka variable lo store cheyali ante tm_ di vadali anta */ {
+    if (day == tm_info->tm_mday && month == tm_info->tm_mon + 1 && year == tm_info->tm_year + 1900)/*chatgpt*/ {
         printf("\nTrain Number: %d (Express)\n", Train_1);
         printf("Available berths: %d\n", generateRandom60to70());
         printf("\nTrain Number: %d (Passenger)\n", Train_4);
@@ -81,8 +81,8 @@ int main() {
         printf("\nTrain Number: %d (Passenger)\n", Train_5);
         printf("Waiting list (RAC): %d\n", generateRandom15to30());
         printf("--------------------------------------------------------------------\n");
-        printf("The trains that are Express are AC and Passenger are Non-AC!\n");//change chesa
-        printf("--------------------------------------------------------------------\n");//change chesa
+        printf("The trains that are Express are AC and Passenger are Non-AC!\n");
+        printf("--------------------------------------------------------------------\n");
     }
 
     int Train_Number, Seats;
