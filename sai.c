@@ -68,7 +68,8 @@ int main() {
         printf("Available berths: %d\n", generateRandom80to90());
         printf("\nTrain Number: %d (Passenger)\n", Train_5);
         printf("Waiting list (RAC): %d\n", generateRandom15to30());
-        printf("--------------------------------------------------------------------\nThe trains that are Express are AC and Passenger are Non-AC!\n");
+        printf("--------------------------------------------------------------------\n");
+        printf("The trains that are Express are AC and Passenger are Non-AC!\n");
     } else {
         printf("\nTrain Number: %d (Express)\n", Train_1);
         printf("Available berths: %d\n", generateRandom60to70());
@@ -142,18 +143,6 @@ int main() {
 
         printf("Enter Seat Preference (W for Window, M for Middle, A for Aisle): ");
         scanf(" %c", &Seat_Preference[i]);
-
-        // Assign seat numbers based on preference
-        if (Seat_Preference[i] == 'W' || Seat_Preference[i] == 'w') {
-            seatNumber[i] = window_seat++;
-        } else if (Seat_Preference[i] == 'M' || Seat_Preference[i] == 'm') {
-            seatNumber[i] = middle_seat++;
-        } else if (Seat_Preference[i] == 'A' || Seat_Preference[i] == 'a') {
-            seatNumber[i] = aisle_seat++;
-        } else {
-            printf("Invalid seat preference entered. Defaulting to aisle.\n");
-            seatNumber[i] = aisle_seat++;
-        }
     }
 
     double fare;//change chesa
@@ -173,32 +162,26 @@ int main() {
     printf("The fare (incl. GST) is %.2lf\n", Total_Fare);
 
     int confirm_code;//change chesa
-    while (1)
-            if (Train_Number == Train_1 || Train_Number == Train_2 || Train_Number == Train_3)
-            {
-                printf("Enter 1234567890 to confirm payment: ");
-                scanf("%d", &confirm_code);
-                if (confirm_code == 1234567890)
-                {
-                    break;
-                }
-            else
-            {
-                printf("Enter 123456789 to confirm payment: ");
-                scanf("%d", &confirm_code);
-
-                if (confirm_code == 123456789)
-                {
-                    break;
-                }
-
-        printf("Incorrect confirmation code. Please enter the correct code.\n");
+    while (1) {
+        if (Train_Number == Train_1 || Train_Number == Train_2 || Train_Number == Train_3) {
+            printf("Enter 1234567890 to confirm payment: ");
+            scanf("%lld", &confirm_code);
+            if (confirm_code == 1234567890) {
+                break;
+            }
+        } else {
+            printf("Enter 123456789 to confirm payment: ");
+            scanf("%lld", &confirm_code);
+            if (confirm_code == 123456789) {
+                break;
+            }
         }
+        printf("Incorrect confirmation code. Please enter the correct code.\n");
+    }
 
-}
     long long PNR = generateRandom10Digit();
 
-    createTicketFile(Train_Number, from, to, day, month, year, Seats, seatNumber, names, Seat_Preference, PNR);
+    createTicketFile(Train_Number, from, to, day, month, year, Seats, names, Seat_Preference, PNR);
 
     printf("Congratulations! Ticket has been booked.\n");
 
