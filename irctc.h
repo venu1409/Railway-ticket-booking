@@ -6,7 +6,7 @@
 
 void createTicketFile(int Train_Number, char from[], char to[], int day, int month, int year, int Seats, char names[][250], char Seat_Preference[], long long PNR) {
     char filename[50];
-    sprintf(filename, "ticket_%lld.txt", PNR);
+    sprintf(filename, "ticket.txt");
     FILE *file = fopen(filename, "w");
     if (file == NULL) {
         printf("Error creating ticket file.\n");
