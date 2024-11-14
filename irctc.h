@@ -1,3 +1,5 @@
+#ifndef IRCTC_H
+#define IRCTC_H
 #include "irctc.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,3 +25,4 @@ void createTicketFile(int Train_Number, char from[], char to[], int day, int mon
     fclose(file);
     printf("Ticket file created: %s\n", filename);
 }
+#endif
