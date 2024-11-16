@@ -4,7 +4,6 @@
 #include <string.h>
 #include "irctc.h"
 
-// Functions to generate random numbers within specific ranges
 int generateRandom60to70() { return (rand() % 11) + 60; }
 int generateRandom1to10() { return (rand() % 10) + 1; }
 int generateRandom5Digit() { return (rand() % 90000) + 10000; }
@@ -50,7 +49,7 @@ int main() {
         }
     }
 
-    // Generating random train numbers
+
     int Train_1 = generateRandom5Digit();
     int Train_2 = generateRandom5Digit();
     int Train_3 = generateRandom5Digit();
