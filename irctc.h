@@ -7,7 +7,7 @@
 void createTicketFile(int Train_Number, char from[], char to[], int day, int month, int year, int Seats, char names[][250], char Seat_Preference[], long long PNR) {
     char filename[50];
     sprintf(filename, "ticket.txt");
-    FILE *file = fopen(filename, "w");
+    FILE *file = fopen(filename, "a");
     if (file == NULL) {
         printf("Error creating ticket file.\n");
         return;
@@ -20,7 +20,7 @@ void createTicketFile(int Train_Number, char from[], char to[], int day, int mon
     fprintf(file, "Date of Journey: %02d-%02d-%d\n", day, month, year);
     fprintf(file, "Number of Seats: %d\n", Seats);
     for (int i = 0; i < Seats; i++) {
-        fprintf(file, "Passenger %d: %s, Seat Preference: %c\n", i + 1, names[i], Seat_Preference[i]);
+        fprintf(file, "Passenger %d: %s, Seat Preference: %c\n\n\n", i + 1, names[i], Seat_Preference[i]);
     }
     fclose(file);
     printf("Ticket file created: %s\n", filename);
