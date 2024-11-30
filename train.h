@@ -1,6 +1,6 @@
-#ifndef IRCTC_H
-#define IRCTC_H
-#include "irctc.h"
+#ifndef TRAIN_H
+#define TRAIN_H
+#include "train.h"
 #include <stdio.h>
 #include <stdlib.h>
 
