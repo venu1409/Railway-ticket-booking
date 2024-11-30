@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
-#include "irctc.h"
+#include "train.h"
 
 int generateRandom60to70() { return (rand() % 11) + 60; }
 int generateRandom1to10() { return (rand() % 10) + 1; }
