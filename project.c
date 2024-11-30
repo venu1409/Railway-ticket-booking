@@ -49,7 +49,7 @@ int main() {
             }
         }
 
-        // Check if the journey details are the same as the previous booking
+
         int repeated = (strcmp(from, previous_from) == 0 && strcmp(to, previous_to) == 0 && day == previous_day && month == previous_month && year == previous_year);
 
         if (!repeated) {
@@ -65,7 +65,7 @@ int main() {
             Train_4_seats = generateRandom80to90();
             Train_5_seats = generateRandom15to30();
 
-            // Update previous journey details
+        
             strcpy(previous_from, from);
             strcpy(previous_to, to);
             previous_day = day;
@@ -109,7 +109,7 @@ int main() {
             }
         }
 
-        // Deduct seats for the selected train
+
         if (Train_Number == Train_1) {
             Train_1_seats -= Seats;
         } else if (Train_Number == Train_2) {
@@ -149,8 +149,18 @@ int main() {
 
             if (i == 0) {
                 char Gmail_Address[250];
-                printf("Email: ");
-                scanf("%s", Gmail_Address);
+                while (1) {
+                    printf("Email: ");
+                    scanf("%s", Gmail_Address);
+
+
+                    char *domain = strrchr(Gmail_Address, '@');
+                    if (domain != NULL && (strcmp(domain, "@gmail.com") == 0 || strcmp(domain, "@student.gitam.edu") == 0 || strcmp(domain, "@gitam.edu") == 0)) {
+                        break;
+                    } else {
+                        printf("Invalid email domain. Please use '@gmail.com', '@student.gitam.edu', or '@gitam.edu'.\n");
+                    }
+                }
             }
 
             printf("Enter Seat Preference (W for Window, M for Middle, A for Aisle): ");
@@ -195,4 +205,3 @@ int main() {
     }
     return 0;
 }
-
