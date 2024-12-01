@@ -42,13 +42,12 @@ int main() {
             printf("Enter the date of journey (in format DD-MM-YYYY, until 01-02-2025): ");
             scanf("%d-%d-%d", &day, &month, &year);
 
-            if (day > 31 || year < 2024 || month > 12) {
-                printf("Invalid date. Please check and enter a valid journey date.\n");
+            if (day < 1 || day > 31 || month < 1 || month > 12 || year < 2024 || (year == 2025 && (month > 2 || (month == 2 && day > 1)))) {
+                printf("Invalid date. Ticket booking is allowed only until 01-02-2025. Please enter a valid date.\n");
             } else {
                 break;
             }
         }
-
 
         int repeated = (strcmp(from, previous_from) == 0 && strcmp(to, previous_to) == 0 && day == previous_day && month == previous_month && year == previous_year);
 
@@ -65,7 +64,6 @@ int main() {
             Train_4_seats = generateRandom80to90();
             Train_5_seats = generateRandom15to30();
 
-        
             strcpy(previous_from, from);
             strcpy(previous_to, to);
             previous_day = day;
@@ -109,7 +107,6 @@ int main() {
             }
         }
 
-
         if (Train_Number == Train_1) {
             Train_1_seats -= Seats;
         } else if (Train_Number == Train_2) {
@@ -152,7 +149,6 @@ int main() {
                 while (1) {
                     printf("Email: ");
                     scanf("%s", Gmail_Address);
-
 
                     char *domain = strrchr(Gmail_Address, '@');
                     if (domain != NULL && (strcmp(domain, "@gmail.com") == 0 || strcmp(domain, "@student.gitam.edu") == 0 || strcmp(domain, "@gitam.edu") == 0)) {
