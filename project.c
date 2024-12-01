@@ -20,6 +20,8 @@ int main() {
     int Train_1 = 0, Train_2 = 0, Train_3 = 0, Train_4 = 0, Train_5 = 0;
     int Train_1_seats = 0, Train_2_seats = 0, Train_3_seats = 0, Train_4_seats = 0, Train_5_seats = 0;
 
+
+
     while (loop == 1) {
         char from[250], to[250];
         int day, month, year;
@@ -38,18 +40,33 @@ int main() {
             }
         }
 
+        time_t t = time(NULL);
+        struct tm *current_time = localtime(&t);
+
+        int system_day = current_time->tm_mday;
+        int system_month = current_time->tm_mon + 1;
+        int system_year = current_time->tm_year + 1900;
+
+        printf("Current Date: %02d-%02d-%d\n", system_day, system_month, system_year);
+
         while (1) {
             printf("Enter the date of journey (in format DD-MM-YYYY, until 01-02-2025): ");
             scanf("%d-%d-%d", &day, &month, &year);
 
-            if (day < 1 || day > 31 || month < 1 || month > 12 || year < 2024 || (year == 2025 && (month > 2 || (month == 2 && day > 1)))) {
+            if (day < 1 || day > 31 || month < 1 || month > 12 || year < 2024 ||
+                (year >= 2025 && (month > 2 || (month == 2 && day > 1)))) {
                 printf("Invalid date. Ticket booking is allowed only until 01-02-2025. Please enter a valid date.\n");
+            } else if (year < system_year ||
+                       (year == system_year && month < system_month) ||
+                       (year == system_year && month == system_month && day < system_day)) {
+                printf("Invalid date.\n");
             } else {
                 break;
             }
         }
 
-        int repeated = (strcmp(from, previous_from) == 0 && strcmp(to, previous_to) == 0 && day == previous_day && month == previous_month && year == previous_year);
+        int repeated = (strcmp(from, previous_from) == 0 && strcmp(to, previous_to) == 0 &&
+                        day == previous_day && month == previous_month && year == previous_year);
 
         if (!repeated) {
             Train_1 = generateRandom5Digit();
@@ -188,11 +205,10 @@ int main() {
         long long PNR = generateRandom10Digit();
 
         createTicketFile(Train_Number, from, to, day, month, year, Seats, names, Seat_Preference, PNR);
-
         printf("Congratulations! Ticket has been booked.\n");
 
         printf("\nEnter 1 for booking another ticket");
-        printf("\nEnter any other for exiting\n");
+        printf("\nEnter any other number for exiting\n");
         scanf("%d", &loop);
 
         if (loop != 1) {
